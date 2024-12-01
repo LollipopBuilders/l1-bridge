@@ -1,0 +1,214 @@
+{
+  "address": "G7i5mhVgDrmt5X4FWRR1jshkky7q9HxRpwWGjPyD4ymA",
+  "metadata": {
+    "name": "root",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "add_roots",
+      "discriminator": [
+        249,
+        209,
+        47,
+        60,
+        18,
+        3,
+        81,
+        219
+      ],
+      "accounts": [
+        {
+          "name": "slots_acc",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "slot_roots_acc",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  111,
+                  111,
+                  116,
+                  115
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "slot"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "slot",
+          "type": "u64"
+        },
+        {
+          "name": "mt_root",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "ws_root",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "slots_acc",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "SlotRootsAccout",
+      "discriminator": [
+        105,
+        143,
+        232,
+        97,
+        45,
+        172,
+        124,
+        156
+      ]
+    },
+    {
+      "name": "SlotsAccount",
+      "discriminator": [
+        65,
+        153,
+        99,
+        72,
+        246,
+        131,
+        81,
+        107
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "IncrementError",
+      "msg": "Only the deployer can call this function"
+    },
+    {
+      "code": 6001,
+      "name": "AlreadyInitialized",
+      "msg": "The counter has already been initialized"
+    },
+    {
+      "code": 6002,
+      "name": "Unauthorized",
+      "msg": "Unauthorized to initialize"
+    }
+  ],
+  "types": [
+    {
+      "name": "SlotRootsAccout",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "merkle_tree_root",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "world_state_root",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "SlotsAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "initialized",
+            "type": "bool"
+          },
+          {
+            "name": "slots",
+            "type": {
+              "vec": "u64"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

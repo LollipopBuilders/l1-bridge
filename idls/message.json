@@ -1,0 +1,399 @@
+{
+  "address": "62StCRGCjwWqhXzrUhjtv7gDjy6ePjFCMBH72Ket49w8",
+  "metadata": {
+    "name": "message",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "nonce",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "fixed_account",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "prove_withdrawal_transaction",
+      "discriminator": [
+        193,
+        227,
+        42,
+        25,
+        246,
+        66,
+        211,
+        96
+      ],
+      "accounts": [
+        {
+          "name": "slot_roots_acc"
+        },
+        {
+          "name": "fixed_account",
+          "docs": [
+            "CHECK"
+          ],
+          "writable": true
+        },
+        {
+          "name": "recipient",
+          "writable": true
+        },
+        {
+          "name": "used_hash",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "from",
+          "type": "pubkey"
+        },
+        {
+          "name": "to",
+          "type": "pubkey"
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "nonce",
+          "type": "u64"
+        },
+        {
+          "name": "message_type",
+          "type": {
+            "defined": {
+              "name": "MessageType"
+            }
+          }
+        },
+        {
+          "name": "slot",
+          "type": "u64"
+        },
+        {
+          "name": "proof",
+          "type": "bytes"
+        },
+        {
+          "name": "proof_index",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "store_cross_chain_info",
+      "discriminator": [
+        3,
+        98,
+        124,
+        37,
+        48,
+        224,
+        91,
+        155
+      ],
+      "accounts": [
+        {
+          "name": "info",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  110,
+                  111,
+                  110,
+                  99,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "nonce_account"
+              },
+              {
+                "kind": "account",
+                "path": "nonce_account"
+              }
+            ]
+          }
+        },
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "nonce_account",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "user",
+          "type": "pubkey"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "FixedAccount",
+      "discriminator": [
+        35,
+        70,
+        105,
+        185,
+        136,
+        29,
+        187,
+        189
+      ]
+    },
+    {
+      "name": "Info",
+      "discriminator": [
+        147,
+        65,
+        188,
+        74,
+        227,
+        5,
+        241,
+        181
+      ]
+    },
+    {
+      "name": "NonceStatus",
+      "discriminator": [
+        46,
+        47,
+        243,
+        182,
+        243,
+        128,
+        235,
+        106
+      ]
+    },
+    {
+      "name": "SlotRootsAccout",
+      "discriminator": [
+        105,
+        143,
+        232,
+        97,
+        45,
+        172,
+        124,
+        156
+      ]
+    },
+    {
+      "name": "UsedHash",
+      "discriminator": [
+        210,
+        146,
+        208,
+        32,
+        76,
+        150,
+        180,
+        169
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "SlotInconsistency",
+      "msg": "Slot inconsistency"
+    },
+    {
+      "code": 6001,
+      "name": "ProofVerifyFailed",
+      "msg": "Proof verify failed"
+    },
+    {
+      "code": 6002,
+      "name": "HashAlreadyUsed",
+      "msg": "Hash has already been used"
+    }
+  ],
+  "types": [
+    {
+      "name": "FixedAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "lamports",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Info",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "from",
+            "type": "pubkey"
+          },
+          {
+            "name": "to",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "nonce",
+            "type": "u64"
+          },
+          {
+            "name": "message_type",
+            "type": {
+              "defined": {
+                "name": "MessageType"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "MessageType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Native"
+          },
+          {
+            "name": "Token"
+          },
+          {
+            "name": "NFT"
+          }
+        ]
+      }
+    },
+    {
+      "name": "NonceStatus",
+      "serialization": "bytemuckunsafe",
+      "repr": {
+        "kind": "c"
+      },
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "nonce",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SlotRootsAccout",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "slot",
+            "type": "u64"
+          },
+          {
+            "name": "merkle_tree_root",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "world_state_root",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "UsedHash",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "used",
+            "type": "bool"
+          }
+        ]
+      }
+    }
+  ]
+}

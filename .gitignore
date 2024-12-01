@@ -1,0 +1,35 @@
+# Rust/Anchor 相关
+.anchor
+.DS_Store
+target
+**/*.rs.bk
+node_modules
+test-ledger
+.yarn
+
+# IDE 配置
+.idea
+.vscode
+*.swp
+*.swo
+
+# 环境变量
+.env
+.env.*
+
+# 日志文件
+*.log
+
+# 密钥文件（重要：防止私钥泄露）
+**/keypair.json
+**/*.keypair
+**/*.so
+**/*.dylib
+
+# 测试相关
+coverage/
+.nyc_output/
+
+# 依赖锁定文件（可选，建议保留其中之一）
+# yarn.lock
+# package-lock.json

@@ -1,0 +1,36 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+        
+    - name: Install Solana
+      run: |
+        sh -c "$(curl -sSfL https://release.solana.com/v1.14.17/install)"
+        export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
+        
+    - name: Install Anchor
+      run: |
+        cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
+        avm install latest
+        avm use latest
+        
+    - name: Install dependencies
+      run: npm install
+        
+    - name: Run tests
+      run: anchor test 
